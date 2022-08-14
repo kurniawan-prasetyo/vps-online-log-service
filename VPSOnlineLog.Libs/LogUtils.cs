@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
-namespace VPSOnlineLog.WinService
+namespace VPSOnlineLog.Libs
 {
-    internal class LogUtils
+    public static class LogUtils
     {
+        private static readonly JsonSerializerSettings _options = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
         public static void WriteDynamicJsonObject(JObject jsonObj, string fileName)
         {
             var streamWriter = File.CreateText(fileName);
@@ -21,9 +24,13 @@ namespace VPSOnlineLog.WinService
 
         public static void StreamWrite(object obj, string fileName)
         {
-            var streamWriter = File.CreateText(fileName);
-            var jsonWriter = new JsonTextWriter(streamWriter);
-            JsonSerializer.CreateDefault().Serialize(jsonWriter, obj);
+            using (var streamWriter = File.CreateText(fileName))
+            {
+                using(var jsonWriter = new JsonTextWriter(streamWriter))
+                {
+                    JsonSerializer.CreateDefault(_options).Serialize(jsonWriter, obj);
+                }
+            }
         }
     }
 }

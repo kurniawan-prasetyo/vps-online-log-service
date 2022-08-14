@@ -68,8 +68,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogService.cs" />
-    <Compile Include="LogUtils.cs" />
     <Compile Include="VPSOnlineLogService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,6 +85,12 @@
     <EmbeddedResource Include="VPSOnlineLogService.resx">
       <DependentUpon>VPSOnlineLogService.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VPSOnlineLog.Libs\VPSOnlineLog.Libs.csproj">
+      <Project>{5f279f8d-10d0-428b-a9cb-13102214ec02}</Project>
+      <Name>VPSOnlineLog.Libs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

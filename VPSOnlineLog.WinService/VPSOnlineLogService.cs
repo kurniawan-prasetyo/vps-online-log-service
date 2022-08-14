@@ -1,87 +1,91 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System;
+using System.Diagnostics;
 using System.ServiceProcess;
 using System.Timers;
+using VPSOnlineLog.Libs.BL;
 
 namespace VPSOnlineLog.WinService
 {
     public partial class VPSOnlineLogService : ServiceBase
     {
         bool IsOnCheckingProcess;
-        Model.LogModel LastLogModel;
-        List<Model.LogModel> AllLogDatas;
-        string LogFilePath;
+        EventLog _eventlog;
+        const string event_log_source = "VPS Online Log";
+        const string event_log_name = "Service Log";
 
         public VPSOnlineLogService()
         {
             InitializeComponent();
 
-            IsOnCheckingProcess = false;
-            LastLogModel = new Model.LogModel();
-            AllLogDatas = new List<Model.LogModel>();
-            LogFilePath = ConfigurationManager.AppSettings["LogFilePath"];
+            _eventlog = new EventLog();
+            if (!EventLog.SourceExists(event_log_source))
+            {
+                EventLog.CreateEventSource(event_log_source, event_log_name);
+            }
+            _eventlog.Source = event_log_source;
+            _eventlog.Log = event_log_name;
+
+
+            try
+            {
+                IsOnCheckingProcess = false;
+            }
+            catch (Exception ex)
+            {
+                _eventlog.WriteEntry(ex.InnerException?.Message ?? ex.Message ?? "Unknown Error!");
+            }
         }
 
         protected override void OnStart(string[] args)
         {
-            if (!string.IsNullOrEmpty(LogFilePath))
+            try
             {
-                using (StreamReader r = new StreamReader(LogFilePath))
-                {
-                    string json = r.ReadToEnd();
-                    AllLogDatas = JsonConvert.DeserializeObject<List<Model.LogModel>>(json);
-                    if (AllLogDatas != null && AllLogDatas.Count > 0)
-                        LastLogModel = AllLogDatas.OrderBy(x => x.LogDate).LastOrDefault();
-                }
-
                 Timer timer = new Timer();
                 timer.Interval = 1000; // 60 seconds
                 timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
                 timer.Start();
             }
+            catch (Exception ex)
+            {
+                _eventlog.WriteEntry(ex.InnerException?.Message ?? ex.Message ?? "Unknown Error!");
+            }
         }
 
         protected override void OnStop()
         {
-            IsOnCheckingProcess = false;
+            try
+            {
+                IsOnCheckingProcess = false;
+            }
+            catch (Exception ex)
+            {
+                _eventlog.WriteEntry(ex.InnerException?.Message ?? ex.Message ?? "Unknown Error!");
+            }
         }
 
         public void OnTimer(object sender, ElapsedEventArgs args)
         {
-            if(!IsOnCheckingProcess)
-                CheckStatus();
+            try
+            {
+                if (!IsOnCheckingProcess)
+                    CheckStatus();
+            }
+            catch (Exception ex)
+            {
+                _eventlog.WriteEntry(ex.InnerException?.Message ?? ex.Message ?? "Unknown Error!");
+            }
         }
 
         void CheckStatus() {
-
-            if(CheckForInternetConnection() && LastLogModel.LogName == "OFFLINE")
-
-
-            IsOnCheckingProcess = false;
-        }
-
-
-        public static bool CheckForInternetConnection(int timeoutMs = 4000, string url = null)
-        {
             try
             {
-                url = url ?? "http://www.gstatic.com/generate_204";
-
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                request.KeepAlive = false;
-                request.Timeout = timeoutMs;
-                using (var response = (HttpWebResponse)request.GetResponse())
-                    return true;
+                var log_service = new LogService();
+                log_service.StartLog();
+                IsOnCheckingProcess = false;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
     }
