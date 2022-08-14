@@ -1,0 +1,9 @@
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\bin\Debug\VPSOnlineLog.Libs.dll
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\bin\Debug\VPSOnlineLog.Libs.pdb
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\obj\Debug\VPSOnlineLog.Libs.csproj.AssemblyReference.cache
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\obj\Debug\VPSOnlineLog.Libs.csproj.CoreCompileInputs.cache
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\obj\Debug\VPSOnlineLog.Libs.csproj.CopyComplete
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\obj\Debug\VPSOnlineLog.Libs.dll
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.Libs\obj\Debug\VPSOnlineLog.Libs.pdb

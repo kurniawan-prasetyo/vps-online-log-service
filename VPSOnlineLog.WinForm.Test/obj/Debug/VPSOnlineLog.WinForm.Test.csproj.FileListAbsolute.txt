@@ -1,0 +1,16 @@
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\VPSOnlineLog.WinForm.Test.exe.config
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\VPSOnlineLog.WinForm.Test.exe
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\VPSOnlineLog.WinForm.Test.pdb
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\VPSOnlineLog.Libs.dll
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\VPSOnlineLog.Libs.pdb
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.csproj.AssemblyReference.cache
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.MainForm.resources
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.Properties.Resources.resources
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.csproj.GenerateResource.cache
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.csproj.CoreCompileInputs.cache
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.csproj.CopyComplete
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.exe
+C:\Users\Kurniawan\source\repos\VPSOnlineLog\VPSOnlineLog.WinForm.Test\obj\Debug\VPSOnlineLog.WinForm.Test.pdb
