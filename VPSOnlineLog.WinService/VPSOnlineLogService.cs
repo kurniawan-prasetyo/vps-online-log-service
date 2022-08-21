@@ -40,8 +40,10 @@ namespace VPSOnlineLog.WinService
         {
             try
             {
+                System.Threading.Thread.Sleep(10000);
+
                 Timer timer = new Timer();
-                timer.Interval = 1000; // 60 seconds
+                timer.Interval = 1000; 
                 timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
                 timer.Start();
             }
@@ -79,13 +81,17 @@ namespace VPSOnlineLog.WinService
         void CheckStatus() {
             try
             {
+                IsOnCheckingProcess = true;
                 var log_service = new LogService();
                 log_service.StartLog();
-                IsOnCheckingProcess = false;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                IsOnCheckingProcess = false;
             }
         }
     }

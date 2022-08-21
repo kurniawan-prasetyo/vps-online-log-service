@@ -14,26 +14,36 @@ namespace VPSOnlineLog.Libs.BL
     {
         LogModel LastLogModel;
         List<LogModel> AllLogDatas;
-        string LogFilePath;
+        string ProductFolderName;
+        string LogFileName;
         const string ONLINE = "ON";
         const string OFFLINE = "OFFLINE !";
+        const string CompanyFolderName = "KPrasetyo";
 
         public LogService()
         {
             LastLogModel = new LogModel();
             AllLogDatas = new List<LogModel>();
-            LogFilePath = ConfigurationManager.AppSettings["LogFilePath"];
+            ProductFolderName = ConfigurationManager.AppSettings["ProductFolderName"];
+            LogFileName = ConfigurationManager.AppSettings["LogFileName"];
         }
 
         public void StartLog() {
             try
             {
-                if (string.IsNullOrEmpty(LogFilePath)) return;
+                if (string.IsNullOrEmpty(LogFileName) || string.IsNullOrEmpty(LogFileName)) return;
 
-                if (!File.Exists(LogFilePath))
-                    File.Create(LogFilePath);
+                var companyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), CompanyFolderName);
+                var productPath = Path.Combine(companyPath, ProductFolderName);
+                var logFilePath = Path.Combine(productPath, LogFileName);
 
-                using (StreamReader r = new StreamReader(LogFilePath))
+                if(!Directory.Exists(productPath))
+                    Directory.CreateDirectory(productPath);
+                    
+                if (!File.Exists(logFilePath))
+                    File.Create(logFilePath);
+
+                using (StreamReader r = new StreamReader(logFilePath))
                 {
                     string json = r.ReadToEnd();
                     AllLogDatas = JsonConvert.DeserializeObject<List<LogModel>>(json) ?? new List<LogModel>();
@@ -42,7 +52,7 @@ namespace VPSOnlineLog.Libs.BL
                 }
 
                 var isOnline = CheckForInternetConnection();
-                if (isOnline && LastLogModel.LogName != ONLINE)
+                if (isOnline && LastLogModel?.LogName != ONLINE)
                 {
                     AllLogDatas.Add(new LogModel
                     {
@@ -50,7 +60,7 @@ namespace VPSOnlineLog.Libs.BL
                         LogName = ONLINE,
                         LogDate = DateTime.Now
                     });
-                    WriteLog();
+                    WriteLog(logFilePath);
                 }
                 else if (!isOnline && LastLogModel.LogName != OFFLINE)
                 {
@@ -60,7 +70,7 @@ namespace VPSOnlineLog.Libs.BL
                         LogName = OFFLINE,
                         LogDate = DateTime.Now
                     });
-                    WriteLog();
+                    WriteLog(logFilePath);
                 }
                 else 
                 { 
@@ -90,7 +100,7 @@ namespace VPSOnlineLog.Libs.BL
             }
         }
 
-        private void WriteLog() {
+        private void WriteLog(string FilePath){
             try
             {
                 AllLogDatas = AllLogDatas
@@ -98,7 +108,7 @@ namespace VPSOnlineLog.Libs.BL
                     .TakeWhile((x, y) => y < 100)
                     .ToList();
 
-                LogUtils.StreamWrite(AllLogDatas, LogFilePath);
+                LogUtils.StreamWrite(AllLogDatas, FilePath);
             }
             catch (Exception ex)
             {
